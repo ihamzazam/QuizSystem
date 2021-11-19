@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 18, 2021, 11:48:38 PM
+    Author     : Hamza
+*/
+
+.root {
+  -fx-color-correct: #4BB543;
+  -fx-color-wrong: #FC100D;
+  -fx-color-not-answered: grey;
+}
+
+.default-color0.chart-bar { -fx-bar-fill: -fx-color-correct; }
+.default-color1.chart-bar { -fx-bar-fill: -fx-color-wrong; }
+.default-color2.chart-bar { -fx-bar-fill: -fx-color-not-answered; }
+

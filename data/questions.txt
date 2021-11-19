@@ -1,0 +1,26 @@
+25
+1:C:What is the capital of Mozambique?:Brazzaville:Mombasa:Maputo:Dar-es-Salaam
+2:A:Which one is Mozambique?:map.jpg:A:B:C:D
+3:B:Which of the following currency notes are used in Mozambique?:pound.jpg:metical.jpg:kwacha.jpg:lira.jpg
+1:A:Which of these rivers does NOT flow through Mozambique?:The Congo:The Zambezi:The Limpopo:The Save
+3:C:Which one of these is the correct flag of Mozambique?:malawai.jpg:kenya.jpg:mozambique.jpg:zimbabwe.jpg
+1:B:What currency is used in Montenegro?:U.S. Dollar (USD):European Euro (EUR):South African Rand (ZAR):Australian Dollar (AUD)
+3:D:What is Montenegro’s national animal?:lion.jpg:leopard.jpg:monkey.jpg:eagle.jpg
+2:C:Name of this building?:bujovic.jpg:Our Lady of the Rocks:Tripkovic Palace:Bujovic Palace:Villa Milocer
+3:A:What is Montenegro’s national flower?:mimoza.jpg:cornpoppy.jpg:iris.jpg:edelweiss.jpg
+1:C:Where is the capital of Montenegro?:Tivat:Pljevlja:Podgorica:Budva
+1:C:What is the capital of Mozambique?:Brazzaville:Mombasa:Maputo:Dar-es-Salaam
+2:A:Which one is Mozambique?:map.jpg:A:B:C:D
+3:B:Which of the following currency notes are used in Mozambique?:pound.jpg:metical.jpg:kwacha.jpg:lira.jpg
+1:A:Which of these rivers does NOT flow through Mozambique?:The Congo:The Zambezi:The Limpopo:The Save
+3:C:Which one of these is the correct flag of Mozambique?:malawai.jpg:kenya.jpg:mozambique.jpg:zimbabwe.jpg
+1:B:What currency is used in Montenegro?:U.S. Dollar (USD):European Euro (EUR):South African Rand (ZAR):Australian Dollar (AUD)
+3:D:What is Montenegro’s national animal?:lion.jpg:leopard.jpg:monkey.jpg:eagle.jpg
+2:C:Name of this building?:bujovic.jpg:Our Lady of the Rocks:Tripkovic Palace:Bujovic Palace:Villa Milocer
+3:A:What is Montenegro’s national flower?:mimoza.jpg:cornpoppy.jpg:iris.jpg:edelweiss.jpg
+1:C:Where is the capital of Montenegro?:Tivat:Pljevlja:Podgorica:Budva
+1:B:What currency is used in Montenegro?:U.S. Dollar (USD):European Euro (EUR):South African Rand (ZAR):Australian Dollar (AUD)
+3:D:What is Montenegro’s national animal?:lion.jpg:leopard.jpg:monkey.jpg:eagle.jpg
+2:C:Name of this building?:bujovic.jpg:Our Lady of the Rocks:Tripkovic Palace:Bujovic Palace:Villa Milocer
+3:A:What is Montenegro’s national flower?:mimoza.jpg:cornpoppy.jpg:iris.jpg:edelweiss.jpg
+1:C:Where is the capital of Montenegro?:Tivat:Pljevlja:Podgorica:Budva
