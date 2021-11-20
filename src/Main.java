@@ -29,8 +29,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	// declaring and initializing the variables 
-	private File myf = new File("./data", "questions.txt");
-	private File myf2 = new File("./data", "result.txt");
+	private File myf = new File("./data", "inputdata.txt");
+	private File myf2 = new File("./data", "answers.txt");
 	private int totQues = 0;
 	private int activeQ = 1;
 	private Label labQuesNo, labQues, labName, labCountry, labID;

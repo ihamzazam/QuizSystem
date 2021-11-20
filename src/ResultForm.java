@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 public class ResultForm extends Stage {
 
     //Declaration and initialisation of variables
-    private File rfile = new File("./data", "result.txt");
-    private File qfile = new File("./data", "questions.txt");
+    private File rfile = new File("./data", "answers.txt");
+    private File qfile = new File("./data", "inputdata.txt");
     private int totQues = 25;
     ComboBox<String> comboBox;
     Label labResultLabel = new Label("R E S U L T S ");

@@ -28,8 +28,8 @@ import javafx.scene.Node;
 public class AnalysisForm extends Stage {
 
     //Declaration and initialisation of variables
-    private File qf = new File("./data", "questions.txt");
-    private File myf = new File("./data", "result.txt");
+    private File qf = new File("./data", "inputdata.txt");
+    private File myf = new File("./data", "answers.txt");
     final CategoryAxis xAxis = new CategoryAxis();
     final NumberAxis yAxis = new NumberAxis();
     final BarChart<String, Number> bc = new BarChart<String, Number>(xAxis, yAxis);
