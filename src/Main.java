@@ -258,6 +258,9 @@ public class Main extends Application {
 			flag();
 			CandidatePhoto();
 		});
+                winEntryForm.setOnCloseRequest(e -> {
+                    System.exit(0);
+		});
 		winResult = new ResultForm();
 
 		// Playing Siren Sound when time is less than 10 seconds
@@ -270,7 +273,7 @@ public class Main extends Application {
 	private void CandidatePhoto() {
 		FileInputStream input1;
 		try {
-			input1 = new FileInputStream("./data/Cand_Pics/" + winEntryForm.getName() + ".jpg");
+			input1 = new FileInputStream("./data/contestant_pics/" + winEntryForm.getName() + ".jpg");
 			Image image1 = new Image(input1);
 			ImageView imageCand = new ImageView(image1);
 			imageCand.setLayoutX(1050);
@@ -426,7 +429,7 @@ public class Main extends Application {
 		radChoice4.setSelected(quesList.get(activeQ - 1).getSelected(3));
 	}
 
-	// Save Contestant's Answer to result.txt
+	// Save Contestant's Answer to answers.txt
 	public void saveToFile() {
 		try {
 			String selected = "";
@@ -453,7 +456,7 @@ public class Main extends Application {
 		}
 	}
 
-	// Read Questions from questions.txt
+	// Read Questions from inputdata.txt
 	public void readFromFile() {
 		Scanner sfile;
 		int type;

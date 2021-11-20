@@ -3,24 +3,24 @@
 2:A:Which one is Mozambique?:map.jpg:A:B:C:D
 3:B:Which of the following currency notes are used in Mozambique?:pound.jpg:metical.jpg:kwacha.jpg:lira.jpg
 1:A:Which of these rivers does NOT flow through Mozambique?:The Congo:The Zambezi:The Limpopo:The Save
-3:C:Which one of these is the correct flag of Mozambique?:malawai.jpg:kenya.jpg:mozambique.jpg:zimbabwe.jpg
+3:C:Which one of these is the correct flag of Mozambique?:malawi.jpg:kenya.jpg:mozambique.jpg:zimbabwe.jpg
 1:B:What currency is used in Montenegro?:U.S. Dollar (USD):European Euro (EUR):South African Rand (ZAR):Australian Dollar (AUD)
 3:D:What is Montenegro’s national animal?:lion.jpg:leopard.jpg:monkey.jpg:eagle.jpg
 2:C:Name of this building?:bujovic.jpg:Our Lady of the Rocks:Tripkovic Palace:Bujovic Palace:Villa Milocer
 3:A:What is Montenegro’s national flower?:mimoza.jpg:cornpoppy.jpg:iris.jpg:edelweiss.jpg
 1:C:Where is the capital of Montenegro?:Tivat:Pljevlja:Podgorica:Budva
-1:C:What is the capital of Mozambique?:Brazzaville:Mombasa:Maputo:Dar-es-Salaam
-2:A:Which one is Mozambique?:map.jpg:A:B:C:D
-3:B:Which of the following currency notes are used in Mozambique?:pound.jpg:metical.jpg:kwacha.jpg:lira.jpg
-1:A:Which of these rivers does NOT flow through Mozambique?:The Congo:The Zambezi:The Limpopo:The Save
-3:C:Which one of these is the correct flag of Mozambique?:malawai.jpg:kenya.jpg:mozambique.jpg:zimbabwe.jpg
-1:B:What currency is used in Montenegro?:U.S. Dollar (USD):European Euro (EUR):South African Rand (ZAR):Australian Dollar (AUD)
-3:D:What is Montenegro’s national animal?:lion.jpg:leopard.jpg:monkey.jpg:eagle.jpg
-2:C:Name of this building?:bujovic.jpg:Our Lady of the Rocks:Tripkovic Palace:Bujovic Palace:Villa Milocer
-3:A:What is Montenegro’s national flower?:mimoza.jpg:cornpoppy.jpg:iris.jpg:edelweiss.jpg
-1:C:Where is the capital of Montenegro?:Tivat:Pljevlja:Podgorica:Budva
-1:B:What currency is used in Montenegro?:U.S. Dollar (USD):European Euro (EUR):South African Rand (ZAR):Australian Dollar (AUD)
-3:D:What is Montenegro’s national animal?:lion.jpg:leopard.jpg:monkey.jpg:eagle.jpg
-2:C:Name of this building?:bujovic.jpg:Our Lady of the Rocks:Tripkovic Palace:Bujovic Palace:Villa Milocer
-3:A:What is Montenegro’s national flower?:mimoza.jpg:cornpoppy.jpg:iris.jpg:edelweiss.jpg
-1:C:Where is the capital of Montenegro?:Tivat:Pljevlja:Podgorica:Budva
+1:B:What is the capital of Myanmar?:Naypi:Naypyidaw:Yangon:Rangon
+1:D:What is the former name of Myanmar?:Thailand:Malaysia:Boondock:Burma
+3:A:Which one of these is the flag of Myanmar?:myanmar.jpg:japan.jpg:india.jpg:china.jpg
+2:B:What is the name of this landmark in Myanmar?:shwedagon.jpg:The Tower:Shwedagon Pagoda:Building:Temple
+2:C:What is the name of this individual?:aung.jpg:Joyah:Aung San Suu Kyi:Donald Trump:Minah
+1:A:Which is the capital of Moroccoa?:Rabat:Khartoum:Addis Ababa:Tripoli
+2:D:What is in the centre of Morocco’s national flag?:morocco.jpg:Sun:Red star:Wheel:Five pointed green star
+3:A:Which one of these is the currency of Morocco?:dirham.jpg:dinar.jpg:riyal.jpg:rupee.jpg
+2:C:Who is shown in this picture?:aziz.jpg:Obama:Mamat:Aziz Akhannouch:Elon
+1:A:Which famous film has the name of a city of Morocco?:Casablanca:New York:Tangier:Marrakesh
+1:C:Which currency is used in Namibia?:European Euro (EUR):U.S. Dollar (USD):Namibian Dollar (NAD):Australian Dollar (AUD)
+1:A:Where is the capital of Namibia?:Windhoek:Kabul:Algiers:Yerevan
+2:D:What is the name of Namibia’s President?:HageGeingob.jpg:Joko Widodo:Joe Biden:Rodrigo Duterte:Hage Geingob
+3:A:Namibia has the world's highest population of which of these animals?:Cheetah.jpg:elephant.jpg:buffalo.jpg:Giraffe.jpg
+3:B:Which is Montenegro’s national food?:Briyani.jpg:Oshithima.jpg:Noodles.jpg:MeatPie.jpg
