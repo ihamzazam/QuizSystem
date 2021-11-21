@@ -58,7 +58,7 @@ public class Main extends Application {
 
 		//rightPanel
 		rightPanel = new Rectangle();
-		rightPanel.setWidth(10);
+		rightPanel.setWidth(5);
 		rightPanel.setHeight(900);
 		rightPanel.setX(990);
 		rightPanel.setY(0);
@@ -100,25 +100,25 @@ public class Main extends Application {
 		imgAnsA.setLayoutX(75);
 		imgAnsA.setLayoutY(75);
 		imgAnsA.setFitHeight(200);
-		imgAnsA.setFitWidth(200);
+		imgAnsA.setFitWidth(250);
 
 		imgAnsB = new ImageView();
 		imgAnsB.setLayoutX(75);
 		imgAnsB.setLayoutY(300);
 		imgAnsB.setFitHeight(200);
-		imgAnsB.setFitWidth(200);
+		imgAnsB.setFitWidth(250);
 
 		imgAnsC = new ImageView();
 		imgAnsC.setLayoutX(500);
 		imgAnsC.setLayoutY(75);
 		imgAnsC.setFitHeight(200);
-		imgAnsC.setFitWidth(200);
+		imgAnsC.setFitWidth(250);
 
 		imgAnsD = new ImageView();
 		imgAnsD.setLayoutX(500);
 		imgAnsD.setLayoutY(300);
 		imgAnsD.setFitHeight(200);
-		imgAnsD.setFitWidth(200);
+		imgAnsD.setFitWidth(250);
 
 		labA = new Label("A");
 		labA.setLayoutX(25);
@@ -410,18 +410,18 @@ public class Main extends Application {
 			imgAnsC.setImage(imgC);
 			imgAnsD.setImage(imgD);
 
-			labA.setLayoutY(150);
-			radChoice1.setLayoutY(150);
-			labB.setLayoutY(350);
-			radChoice2.setLayoutY(350);
+			labA.setLayoutY(170);
+			radChoice1.setLayoutY(170);
+			labB.setLayoutY(390);
+			radChoice2.setLayoutY(390);
 			labC.setLayoutX(450);
-			labC.setLayoutY(150);
+			labC.setLayoutY(170);
 			radChoice3.setLayoutX(475);
-			radChoice3.setLayoutY(150);
+			radChoice3.setLayoutY(170);
 			labD.setLayoutX(450);
-			labD.setLayoutY(350);
+			labD.setLayoutY(390);
 			radChoice4.setLayoutX(475);
-			radChoice4.setLayoutY(350);
+			radChoice4.setLayoutY(390);
 		}
 		radChoice1.setSelected(quesList.get(activeQ - 1).getSelected(0));
 		radChoice2.setSelected(quesList.get(activeQ - 1).getSelected(1));

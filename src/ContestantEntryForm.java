@@ -127,10 +127,17 @@ public class ContestantEntryForm extends Stage {
 			checkNames();
                         verified = verification();
                         if (listNames.contains(comboBoxName.getValue())) {
-                            comboBoxName.setValue(" ");
+                            comboBoxName.setValue("");
                             contName.setText("This user has taken the test, please select another user");
                             contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
+                            imageCont.setImage(imageBlank);
+                            imageCont2.setImage(imageBlank);
+                            imageCont3.setImage(imageBlank);
                         } 
+                        else if (comboBoxName.getValue() == "") {
+                            contName.setText("Please select a user to proceed");
+                            contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
+                        }
                         else if (verified == false) {
                             contName.setText("Incorrect Password");
                             contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
