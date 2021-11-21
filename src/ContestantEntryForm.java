@@ -42,8 +42,8 @@ public class ContestantEntryForm extends Stage {
 
     // declaring and initializing the variables 
     private File contProfile = new File("./data", "contestants.txt");
-    private File rfile = new File("./data", "result.txt");
-    private TextField fieldName, fieldPass, fieldPassVerify;
+    private File rfile = new File("./data", "answers.txt");
+    private TextField fieldName, fieldPass;
     private Boolean verified = false;
     private ChoiceBox<String> choicebox = new ChoiceBox<>();
     private VBox contestantVbox;
@@ -125,11 +125,16 @@ public class ContestantEntryForm extends Stage {
 		proceedBtn = new Button("PROCEED TO TEST");
 		proceedBtn.setOnAction(e -> {
 			checkNames();
+                        verified = verification();
                         if (listNames.contains(comboBoxName.getValue())) {
                             comboBoxName.setValue(" ");
                             contName.setText("This user has taken the test, please select another user");
                             contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
                         } 
+                        else if (verified == false) {
+                            contName.setText("Incorrect Password");
+                            contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
+                        }
                         else {
                               this.hide();                       
                         }
@@ -264,6 +269,29 @@ public class ContestantEntryForm extends Stage {
 		}
 	}
 	
+        public boolean verification() {
+            boolean v = false;
+            try {
+                Scanner sfile = new Scanner(contProfile);
+                int totalCont = Integer.parseInt(sfile.nextLine());
+                for (int i = 0; i < totalCont; i++) {
+                    String aline = sfile.nextLine();
+                    Scanner sline = new Scanner(aline);
+                    sline.useDelimiter(",");
+                    String n = sline.next();
+                    if (comboBoxName.getValue().equals(n)) {
+                        String p = sline.next();
+                        if (fieldPass.getText().equals(p)){
+                            v = true;
+                        }
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("file not found");
+            }
+            return v;
+        }
+        
 	// Scanning for names in results.txt file
 	public void checkNames() {
 		Scanner rFile;
