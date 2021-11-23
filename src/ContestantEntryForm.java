@@ -22,6 +22,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,9 +48,9 @@ public class ContestantEntryForm extends Stage {
     private Boolean verified = false;
     private ChoiceBox<String> choicebox = new ChoiceBox<>();
     private VBox contestantVbox;
-    private HBox contestantHbox;
+    private HBox contestantHbox, contestantHbox2;
     private Scene contestantScene;
-    private Label labTitle,labCountry,labPass,labPassVerify,contName,space;
+    private Label labTitle,labCountry,labPass,contName,space;
     private Button proceedBtn, btnResult;
     private FileInputStream inputHamza, inputKish, inputCherng, inputSara, inputFirdaus, inputHamza2, inputKish2, inputCherng2, inputSara2, inputFirdaus2, inputHamza3, inputKish3, inputCherng3, inputSara3, inputFirdaus3, inputBlank;
     private Image imageHamza, imageKish, imageCherng, imageSara, imageFirdaus,imageHamza2, imageKish2, imageCherng2, imageSara2, imageFirdaus2, imageHamza3, imageKish3, imageCherng3, imageSara3, imageFirdaus3, imageBlank;
@@ -63,23 +64,24 @@ public class ContestantEntryForm extends Stage {
 	public ContestantEntryForm() {
 		profilePhoto();
 		
-		this.setTitle("Contestant Form");
+		this.setTitle("MUKT - Contestant Entry Form");
 
 		// Setting the label for the title MUKT
 		labTitle = new Label("Miss Universe Knowledge Test");
 		labTitle.setStyle("-fx-font-size: 25pt;-fx-font-weight: bold;-fx-font-family:serif;-fx-text-fill:#000000;");
+                labTitle.setPadding(new Insets(0,20,10,10));
 
 		// Setting the label for select country option
 		labCountry = new Label("Select your Country");
-		labCountry.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#0000ff;");
+		labCountry.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 
 		// Setting the label for entering the password
 		labPass = new Label("Please enter your Password");
-		labPass.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#0000ff;");
+		labPass.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 
 		// Setting the label for entering the username
 		contName = new Label("Please enter your Name");
-		contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#0000ff;");
+		contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 		
 		space = new Label("");
 
@@ -122,7 +124,7 @@ public class ContestantEntryForm extends Stage {
                 choicebox.setMaxWidth(325);
 
 		// Button to start the test 
-		proceedBtn = new Button("PROCEED TO TEST");
+		proceedBtn = new Button(" PROCEED TO TEST ");
 		proceedBtn.setOnAction(e -> {
 			checkNames();
                         verified = verification();
@@ -148,7 +150,7 @@ public class ContestantEntryForm extends Stage {
 		});
 
                 // Button to view the results
-                btnResult = new Button("PROCEED TO RESULT");
+                btnResult = new Button(" PROCEED TO RESULT ");
 		btnResult.setOnAction(e -> {
                         winResult = new ResultForm();
                         winResult.readName();
@@ -195,28 +197,35 @@ public class ContestantEntryForm extends Stage {
 
 		// Default setup image
 		imageCont = new ImageView(imageBlank);
-		imageCont.setFitHeight(200);
-		imageCont.setFitWidth(200);
+		imageCont.setFitHeight(225);
+		imageCont.setFitWidth(250);
                 
                 imageCont2 = new ImageView(imageBlank);
-		imageCont2.setFitHeight(200);
-		imageCont2.setFitWidth(200);
+		imageCont2.setFitHeight(225);
+		imageCont2.setFitWidth(250);
                 
                 imageCont3 = new ImageView(imageBlank);
-		imageCont3.setFitHeight(200);
-		imageCont3.setFitWidth(200);
+		imageCont3.setFitHeight(225);
+		imageCont3.setFitWidth(250);
                 
                 // Hbox for the 3 images to make the appear next to each other
                 contestantHbox = new HBox(imageCont, imageCont2, imageCont3);
                 contestantHbox.setSpacing(20);
                 contestantHbox.setAlignment(Pos.CENTER);
-		
+                
+                // Hbox for the two buttons (proceed and result) at the bottom of entry form
+                contestantHbox2 = new HBox(proceedBtn, btnResult);
+		contestantHbox2.setPadding(new Insets(15, 12, 15, 12));
+                contestantHbox2.setSpacing(10);
+                contestantHbox2.setAlignment(Pos.CENTER);
+                
                 // Add contestant Vbox and Scene
                 contestantVbox = new VBox(12);
                 contestantVbox.setAlignment(Pos.CENTER);
-                contestantVbox.getChildren().addAll(labTitle,contName, contestantHbox,comboBoxName,labPass,fieldPass,labCountry,choicebox,space,proceedBtn,btnResult);
-                contestantScene = new Scene(contestantVbox, 900, 750);
+                contestantVbox.getChildren().addAll(labTitle, contestantHbox,contName,comboBoxName,labPass,fieldPass,labCountry,choicebox,contestantHbox2,space);
+                contestantScene = new Scene(contestantVbox, 900, 700);
                 this.setScene(contestantScene);
+                contestantScene.getStylesheets().add("login.css");
                 this.show();
 	}
         

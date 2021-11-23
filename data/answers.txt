@@ -1,2 +1,3 @@
 N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:Hamza
-N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:Hamza
+D:B:D:C:B:C:C:A:B:D:C:N:N:N:N:D:C:D:A:D:D:C:D:D:D:Firdaus
+D:B:D:C:B:C:C:A:B:D:C:N:N:N:N:D:C:D:A:D:D:C:D:D:D:Firdaus

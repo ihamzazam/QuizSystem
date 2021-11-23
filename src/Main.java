@@ -83,7 +83,7 @@ public class Main extends Application {
 		labQuesNo = new Label("");
 		labQuesNo.setLayoutX(50);
 		labQuesNo.setLayoutY(50);
-		labQuesNo.setStyle("-fx-font-size: 15pt;-fx-font-family:serif;-fx-text-fill:#0000ff;");
+		labQuesNo.setStyle("-fx-font-size: 18pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 
 		labQues = new Label("");
 		labQues.setLayoutX(50);
@@ -93,52 +93,60 @@ public class Main extends Application {
 		imgQues = new ImageView();
 		imgQues.setLayoutX(50);
 		imgQues.setLayoutY(75);
-		imgQues.setFitHeight(175);
-		imgQues.setFitWidth(175);
+		imgQues.setFitHeight(250);
+		imgQues.setFitWidth(300);
 
 		imgAnsA = new ImageView();
 		imgAnsA.setLayoutX(75);
 		imgAnsA.setLayoutY(75);
 		imgAnsA.setFitHeight(200);
-		imgAnsA.setFitWidth(250);
+		imgAnsA.setFitWidth(300);
 
 		imgAnsB = new ImageView();
 		imgAnsB.setLayoutX(75);
 		imgAnsB.setLayoutY(300);
 		imgAnsB.setFitHeight(200);
-		imgAnsB.setFitWidth(250);
+		imgAnsB.setFitWidth(300);
 
 		imgAnsC = new ImageView();
 		imgAnsC.setLayoutX(500);
 		imgAnsC.setLayoutY(75);
 		imgAnsC.setFitHeight(200);
-		imgAnsC.setFitWidth(250);
+		imgAnsC.setFitWidth(300);
 
 		imgAnsD = new ImageView();
 		imgAnsD.setLayoutX(500);
 		imgAnsD.setLayoutY(300);
 		imgAnsD.setFitHeight(200);
-		imgAnsD.setFitWidth(250);
+		imgAnsD.setFitWidth(300);
 
-		labA = new Label("A");
+		labA = new Label("A ");
 		labA.setLayoutX(25);
+                labA.setStyle("-fx-font-size: 20pt;-fx-font-weight:bold;");
 		radChoice1 = new RadioButton("");
 		radChoice1.setLayoutX(50);
-
-		labB = new Label("B");
+                radChoice1.setStyle("-fx-font-size: 12pt;-fx-font-weight:bold;");
+                
+		labB = new Label("B ");
 		labB.setLayoutX(25);
+                labB.setStyle("-fx-font-size: 20pt;-fx-font-weight:bold;");
 		radChoice2 = new RadioButton("");
 		radChoice2.setLayoutX(50);
-
-		labC = new Label("C");
+                radChoice2.setStyle("-fx-font-size: 12pt;-fx-font-weight:bold;");
+                
+		labC = new Label("C ");
 		labC.setLayoutX(25);
+                labC.setStyle("-fx-font-size: 20pt;-fx-font-weight:bold;");
 		radChoice3 = new RadioButton("");
 		radChoice3.setLayoutX(50);
+                radChoice3.setStyle("-fx-font-size: 12pt;-fx-font-weight:bold;");
 
-		labD = new Label("D");
+		labD = new Label("D ");
 		labD.setLayoutX(25);
+                labD.setStyle("-fx-font-size: 20pt;-fx-font-weight:bold;");
 		radChoice4 = new RadioButton("");
 		radChoice4.setLayoutX(50);
+                radChoice4.setStyle("-fx-font-size: 12pt;-fx-font-weight:bold;");
 
 		grpChoices = new ToggleGroup();
 
@@ -247,6 +255,7 @@ public class Main extends Application {
 
 		mainScene = new Scene(mainPane, 1400, 900); // reszie
 		mainStage.setScene(mainScene);
+                mainScene.getStylesheets().add("login.css");
 		reloadQues();
 		winEntryForm = new ContestantEntryForm();
 		winEntryForm.setOnHiding(e -> {
@@ -256,7 +265,7 @@ public class Main extends Application {
 			mainStage.show();
 			startTiming(mainStage);
 			flag();
-			CandidatePhoto();
+			ContestantPhoto();
 		});
                 winEntryForm.setOnCloseRequest(e -> {
                     System.exit(0);
@@ -270,24 +279,24 @@ public class Main extends Application {
 
 	}
 
-	private void CandidatePhoto() {
+	private void ContestantPhoto() {
 		FileInputStream input1;
 		try {
 			input1 = new FileInputStream("./data/contestant_pics/" + winEntryForm.getName() + ".jpg");
 			Image image1 = new Image(input1);
-			ImageView imageCand = new ImageView(image1);
-			imageCand.setLayoutX(1050);
-			imageCand.setLayoutY(180);
-			imageCand.setFitHeight(300);
-			imageCand.setFitWidth(300);
-			mainPane.getChildren().add(imageCand);
+			ImageView imageCont = new ImageView(image1);
+			imageCont.setLayoutX(1050);
+			imageCont.setLayoutY(180);
+			imageCont.setFitHeight(300);
+			imageCont.setFitWidth(300);
+			mainPane.getChildren().add(imageCont);
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		}
 		
 	}
 
-	// Display of Country flag
+	// Display the country flag at the bottom right of the test screen
 	public void flag() {
 		FileInputStream input = null;
 		try {
@@ -337,10 +346,10 @@ public class Main extends Application {
 	public void reloadQues() {
 		labQuesNo.setText("Question " + Integer.toString(activeQ) + " of " + totQues);
 		labQues.setText(quesList.get(activeQ - 1).getTheQues());
-		radChoice1.setText(quesList.get(activeQ - 1).getChoice(0));
-		radChoice2.setText(quesList.get(activeQ - 1).getChoice(1));
-		radChoice3.setText(quesList.get(activeQ - 1).getChoice(2));
-		radChoice4.setText(quesList.get(activeQ - 1).getChoice(3));
+		radChoice1.setText("  " + quesList.get(activeQ - 1).getChoice(0));
+		radChoice2.setText("  " + quesList.get(activeQ - 1).getChoice(1));
+		radChoice3.setText("  " + quesList.get(activeQ - 1).getChoice(2));
+		radChoice4.setText("  " + quesList.get(activeQ - 1).getChoice(3));
 		imgQues.setImage(null);
 		imgAnsA.setImage(null);
 		imgAnsB.setImage(null);
@@ -351,19 +360,19 @@ public class Main extends Application {
 			labA.setLayoutX(25);
 			labA.setLayoutY(75);
 			radChoice1.setLayoutX(50);
-			radChoice1.setLayoutY(75);
+			radChoice1.setLayoutY(82);
 			labB.setLayoutX(25);
 			labB.setLayoutY(125);
 			radChoice2.setLayoutX(50);
-			radChoice2.setLayoutY(125);
+			radChoice2.setLayoutY(132);
 			labC.setLayoutX(25);
 			labC.setLayoutY(175);
 			radChoice3.setLayoutX(50);
-			radChoice3.setLayoutY(175);
+			radChoice3.setLayoutY(182);
 			labD.setLayoutX(25);
 			labD.setLayoutY(225);
 			radChoice4.setLayoutX(50);
-			radChoice4.setLayoutY(225);
+			radChoice4.setLayoutY(232);
 		}
 		if (quesList.get(activeQ - 1).getType() == 2) {
 			File pFile = new File("data/QuestionsPics/" + quesList.get(activeQ - 1).getQuesPic());
@@ -374,21 +383,21 @@ public class Main extends Application {
 			imgAnsC.setImage(null);
 			imgAnsD.setImage(null);
 			labA.setLayoutX(25);
-			labA.setLayoutY(275);
+			labA.setLayoutY(350);
 			radChoice1.setLayoutX(50);
-			radChoice1.setLayoutY(275);
+			radChoice1.setLayoutY(357);
 			labB.setLayoutX(25);
-			labB.setLayoutY(325);
+			labB.setLayoutY(390);
 			radChoice2.setLayoutX(50);
-			radChoice2.setLayoutY(325);
+			radChoice2.setLayoutY(397);
 			labC.setLayoutX(25);
-			labC.setLayoutY(375);
+			labC.setLayoutY(440);
 			radChoice3.setLayoutX(50);
-			radChoice3.setLayoutY(375);
+			radChoice3.setLayoutY(447);
 			labD.setLayoutX(25);
-			labD.setLayoutY(425);
+			labD.setLayoutY(485);
 			radChoice4.setLayoutX(50);
-			radChoice4.setLayoutY(425);
+			radChoice4.setLayoutY(492);
 		}
 		radChoice1.setSelected(quesList.get(activeQ - 1).getSelected(0));
 		radChoice2.setSelected(quesList.get(activeQ - 1).getSelected(1));
@@ -410,16 +419,16 @@ public class Main extends Application {
 			imgAnsC.setImage(imgC);
 			imgAnsD.setImage(imgD);
 
-			labA.setLayoutY(170);
+			labA.setLayoutY(165);
 			radChoice1.setLayoutY(170);
-			labB.setLayoutY(390);
+			labB.setLayoutY(385);
 			radChoice2.setLayoutY(390);
 			labC.setLayoutX(450);
-			labC.setLayoutY(170);
+			labC.setLayoutY(165);
 			radChoice3.setLayoutX(475);
 			radChoice3.setLayoutY(170);
 			labD.setLayoutX(450);
-			labD.setLayoutY(390);
+			labD.setLayoutY(385);
 			radChoice4.setLayoutX(475);
 			radChoice4.setLayoutY(390);
 		}

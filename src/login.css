@@ -1,0 +1,46 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 22, 2021, 4:39:21 PM
+    Author     : Hamza
+*/
+
+/*.root {
+     -fx-background-image: url("login/Pakistan.jpg");
+}*/
+
+/*@font-face {
+    font-family: AgencyFB;
+    src: url('agency-fb.ttf');
+}*/
+
+.root {
+/*     -fx-background: blue;*/
+       -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ec2F4B, #009FFF);  
+       -fx-color-correct: #4BB543;
+       -fx-color-wrong: #FC100D;
+       -fx-color-not-answered: grey;
+       
+/*       -fx-font-family: AgencyFB;*/
+
+}
+
+/* @import url(https://allfont.net/allfont.css?fonts=agency-fb);*/
+ 
+.button:hover {
+    -fx-background-color: linear-gradient(#74ebd5, #ACB6E5);
+    -fx-effect:dropshadow(one-pass-box,black,8,0.0,2,0);
+}
+
+.button {
+    -fx-font-size: 12px;
+    -fx-font-weight: BOLD;
+}
+
+.default-color0.chart-bar { -fx-bar-fill: -fx-color-correct; -fx-font-size: 16pt;}
+.default-color1.chart-bar { -fx-bar-fill: -fx-color-wrong; }
+.default-color2.chart-bar { -fx-bar-fill: -fx-color-not-answered; }
+

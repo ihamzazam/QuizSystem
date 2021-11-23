@@ -41,13 +41,18 @@ public class AnalysisForm extends Stage {
     public AnalysisForm() {
 
         Label labResult = new Label();
-
+        Label space = new Label();
+        space = new Label("");
         this.setTitle("MUKT Analaysis");
         bc.setTitle("Result Summary");
         xAxis.setLabel("Participant(s)");
+        xAxis.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
         yAxis.setLabel("Score");
+        yAxis.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
         bc.setMinHeight(500);
         bc.setMinWidth(1000);
+//        bc.setStyle("-fx-font-size: " + 14 + "px; -fx-font-weight:BOLD;");
+        labResult.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 
         Scanner sQueFile;
         char ansSheet[] = new char[totQues];
@@ -146,13 +151,14 @@ public class AnalysisForm extends Stage {
                 std = stdDeviation(cRes, count, mean);
                 std = Math.round(std * 100.0) / 100.0;
 
-                labResult.setText("The statistical result shown is based on the correct answer \n"
-                        + "HIGHEST SCORE" + "\t\t\t" + Integer.toString(max) + "\n"
-                        + "LOWEST SCORE" + "\t\t\t" + Integer.toString(min) + "\n"
-                        + "MEAN" + "\t\t\t\t\t" + Double.toString(mean) + "\n"
-                        + "MODE" + "\t\t\t\t\t" + Integer.toString(mode) + "\n"
-                        + "MEDIAN" + "\t\t\t\t\t" + Double.toString(median) + "\n"
-                        + "STANDARD DEVIATION" + "\t\t" + Double.toString(std));
+                labResult.setText("Statistical Analysis \n"
+                        + "\n"
+                        + "Highest Score" + "\t\t" + ": " + Integer.toString(max) + "\n"
+                        + "Lowest Score" + "\t\t" + ": " + Integer.toString(min) + "\n"
+                        + "Mean" + "\t\t\t" + ": " + Double.toString(mean) + "\n"
+                        + "Mode" + "\t\t\t" + ": " + Integer.toString(mode) + "\n"
+                        + "Median" + "\t\t\t" + ": " + Double.toString(median) + "\n"
+                        + "Standard Deviation" + "\t" + ": " + Double.toString(std));
             }
             sfile.close();
         } catch (FileNotFoundException e) {
@@ -166,12 +172,12 @@ public class AnalysisForm extends Stage {
             this.close();
         });
 
-        VBox myVBox = new VBox(bc, labResult, btnExit);
+        VBox myVBox = new VBox(bc, labResult, space, btnExit);
         myVBox.setAlignment(Pos.TOP_CENTER);
 
-        myVBox.getStylesheets().add("Chart.css");
+        myVBox.getStylesheets().add("login.css");
 
-        this.setScene(new Scene(myVBox, 1200, 700));
+        this.setScene(new Scene(myVBox, 1200, 725));
     }
 
     //Calculation of maximum score

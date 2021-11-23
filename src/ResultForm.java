@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -28,7 +29,7 @@ public class ResultForm extends Stage {
     private File qfile = new File("./data", "inputdata.txt");
     private int totQues = 25;
     ComboBox<String> comboBox;
-    Label labResultLabel = new Label("R E S U L T S ");
+    Label labResultLabel = new Label("RESULT");
     private Label labName, labGrade;
     private Label labResult, labPercentage;
     private AnalysisForm winAnalysis;
@@ -39,17 +40,23 @@ public class ResultForm extends Stage {
 
     public ResultForm() {
         this.setTitle("Results");
-        labName = new Label("Choose the result of participant that you want to view");
+        labName = new Label("Select a contestant to view their results");
+        labName.setStyle("-fx-font-size: 20pt;-fx-font-weight:BOLD;");
 
         // Show "Results"
         labResult = new Label();
+        labResult.setStyle("-fx-font-size: 14pt;");
+        
+        labResultLabel.setStyle("-fx-font-size: 15pt;");
 
         // Show Percentage
         Label percentage = new Label("PERCENTAGE: ");
+        percentage.setStyle("-fx-font-size: 15pt;");
 
         labPercentage = new Label();
-
+        labPercentage.setStyle("-fx-font-size: 15pt;");
         labGrade = new Label();
+        labGrade.setStyle("-fx-font-size: 15pt;");
 
         Label selected = new Label();
 
@@ -68,17 +75,28 @@ public class ResultForm extends Stage {
         Button btnDisplay = new Button("Display Results");
         btnDisplay.setOnAction(e -> {
             selected.setText("Displaying result of " + comboBox.getValue());
+            selected.setStyle("-fx-font-size: 16pt;");
             compareAns(rfile, qfile);
         });
 
+        HBox myHbox = new HBox(comboBox, btnDisplay);
+	myHbox.setPadding(new Insets(15, 12, 15, 12));
+        myHbox.setSpacing(10);
+        myHbox.setAlignment(Pos.CENTER);
+        
+        HBox myHbox2 = new HBox(percentage,labPercentage);
+        myHbox.setPadding(new Insets(15, 12, 15, 12));
+        myHbox.setSpacing(10);
+        myHbox2.setAlignment(Pos.CENTER);
+            
         // Adding the components into the scene
-        VBox myVbox = new VBox(labName, comboBox, btnDisplay, selected, labResultLabel, labResult, percentage,
-                labPercentage, labGrade, btnExit);
+        VBox myVbox = new VBox(labName, myHbox, selected, labResultLabel, labResult, myHbox2, labGrade, btnExit);
         myVbox.setSpacing(10);
         myVbox.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(myVbox, 700, 700);
         this.setScene(scene);
+        scene.getStylesheets().add("login.css");
     }
 
     //Adding names into the dropDown List
@@ -174,13 +192,13 @@ public class ResultForm extends Stage {
                         percentageResults = Math.round(percentageResults * 100.0) / 100.0;
                         labPercentage.setText(Double.toString(percentageResults) + " % ");
 
-                        //Give grade(passed or failed)
+                        // Checks if contestants passed or failed
                         if (percentageResults >= 50) {
-                            labGrade.setText("PASSED. CONGRATULATIONS TO YOU");
+                            labGrade.setText("Contestant successfully passed the quiz!");
                         } else if (percentageResults < 50) {
-                            labGrade.setText("FAILED. BETTER LUCK NEXT TIME :)");
+                            labGrade.setText("Contestant has failed the quiz!");
                         } else {
-                            labGrade.setText("ERROR DISPLAYING GRADE");
+                            labGrade.setText("Sorry, something went wrong!");
                         }
                     }
                 }
