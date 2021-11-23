@@ -96,7 +96,7 @@ public class ResultForm extends Stage {
 
         Scene scene = new Scene(myVbox, 700, 700);
         this.setScene(scene);
-        scene.getStylesheets().add("login.css");
+        scene.getStylesheets().add("style.css");
     }
 
     //Adding names into the dropDown List

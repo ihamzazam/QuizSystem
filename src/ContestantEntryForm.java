@@ -226,7 +226,7 @@ public class ContestantEntryForm extends Stage {
                 contestantVbox.getChildren().addAll(labTitle, contestantHbox,contName,comboBoxName,labPass,fieldPass,labCountry,comboBoxCountry,contestantHbox2,space);
                 contestantScene = new Scene(contestantVbox, 900, 700);
                 this.setScene(contestantScene);
-                contestantScene.getStylesheets().add("login.css");
+                contestantScene.getStylesheets().add("style.css");
                 this.show();
 	}
         

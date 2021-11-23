@@ -255,7 +255,7 @@ public class Main extends Application {
 
 		mainScene = new Scene(mainPane, 1400, 900); // reszie
 		mainStage.setScene(mainScene);
-                mainScene.getStylesheets().add("login.css");
+                mainScene.getStylesheets().add("style.css");
 		reloadQues();
 		winEntryForm = new ContestantEntryForm();
 		winEntryForm.setOnHiding(e -> {
