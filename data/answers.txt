@@ -1,3 +1,3 @@
-N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:N:Hamza
-D:B:D:C:B:C:C:A:B:D:C:N:N:N:N:D:C:D:A:D:D:C:D:D:D:Firdaus
-D:B:D:C:B:C:C:A:B:D:C:N:N:N:N:D:C:D:A:D:D:C:D:D:D:Firdaus
+C:A:B:A:C:B:D:C:A:C:B:D:A:B:C:A:D:A:C:A:C:A:D:A:B:Hamza
+B:A:B:D:A:C:A:B:B:B:C:B:B:A:B:C:B:B:C:C:D:A:B:B:D:Yii Cherng
+B:A:B:B:C:D:A:B:B:N:N:C:N:N:N:N:N:N:N:D:B:A:B:N:N:Kishendran

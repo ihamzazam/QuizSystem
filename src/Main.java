@@ -83,11 +83,11 @@ public class Main extends Application {
 		labQuesNo = new Label("");
 		labQuesNo.setLayoutX(50);
 		labQuesNo.setLayoutY(50);
-		labQuesNo.setStyle("-fx-font-size: 18pt;-fx-font-family:serif;-fx-text-fill:#000000;");
+		labQuesNo.setStyle("-fx-font-size: 18pt;-fx-text-fill:#000000;-fx-font-weight:bold;");
 
 		labQues = new Label("");
 		labQues.setLayoutX(50);
-		labQues.setLayoutY(75);
+		labQues.setLayoutY(85);
 		labQues.setStyle("-fx-font-size: 20pt;-fx-font-weight:bold;");
 
 		imgQues = new ImageView();
@@ -183,18 +183,18 @@ public class Main extends Application {
 		btnPrev = new Button("Prev");
 		btnPrev.setLayoutX(350);
 		btnPrev.setLayoutY(725);
-		btnPrev.setStyle("-fx-pref-width: 100px;-fx-pref-height: 50px;");
+		btnPrev.setStyle("-fx-pref-width: 125px;-fx-pref-height: 50px; -fx-font-size: 15px");
 		btnPrev.setDisable(true);
 
 		btnNext = new Button("Next");
 		btnNext.setLayoutX(550);
 		btnNext.setLayoutY(725);
-		btnNext.setStyle("-fx-pref-width: 100px;-fx-pref-height: 50px;");
+		btnNext.setStyle("-fx-pref-width: 125px;-fx-pref-height: 50px; -fx-font-size: 15px");
 
 		btnSubmit = new Button("Submit");
-		btnSubmit.setLayoutX(1160);
+		btnSubmit.setLayoutX(1110);
 		btnSubmit.setLayoutY(800);
-		btnSubmit.setStyle("-fx-pref-width: 75px;");
+		btnSubmit.setStyle("-fx-pref-width: 200px;-fx-pref-height: 40px;-fx-font-size: 15px");
 		
 		// call to read from file method to read questions from the txt file
 		readFromFile();

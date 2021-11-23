@@ -23,7 +23,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.lang.Math;
-import javafx.scene.Node;
 
 public class AnalysisForm extends Stage {
 
@@ -51,7 +50,6 @@ public class AnalysisForm extends Stage {
         yAxis.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
         bc.setMinHeight(500);
         bc.setMinWidth(1000);
-//        bc.setStyle("-fx-font-size: " + 14 + "px; -fx-font-weight:BOLD;");
         labResult.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 
         Scanner sQueFile;
@@ -175,7 +173,7 @@ public class AnalysisForm extends Stage {
         VBox myVBox = new VBox(bc, labResult, space, btnExit);
         myVBox.setAlignment(Pos.TOP_CENTER);
 
-        myVBox.getStylesheets().add("login.css");
+        myVBox.getStylesheets().add("Chart.css");
 
         this.setScene(new Scene(myVBox, 1200, 725));
     }
@@ -248,5 +246,4 @@ public class AnalysisForm extends Stage {
     public void showStage() {
         this.show();
     }
-
 }

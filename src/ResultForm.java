@@ -11,6 +11,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,18 +26,20 @@ import javafx.stage.Stage;
 public class ResultForm extends Stage {
 
     //Declaration and initialisation of variables
-    private File rfile = new File("./data", "answers.txt");
-    private File qfile = new File("./data", "inputdata.txt");
+    private File ansFile = new File("./data", "answers.txt");
+    private File inputFile = new File("./data", "inputdata.txt");
     private int totQues = 25;
     ComboBox<String> comboBox;
     Label labResultLabel = new Label("RESULT");
-    private Label labName, labGrade;
+    private Label labName;
     private Label labResult, labPercentage;
     private AnalysisForm winAnalysis;
     private char cAns;
     private char ansSheet[] = new char[totQues];
     private char finalAns[] = new char[totQues];
     List<String> listNames = new ArrayList<String>();
+    DecimalFormat df0 = new DecimalFormat("#");
+    DecimalFormat df2 = new DecimalFormat("#.00");
 
     public ResultForm() {
         this.setTitle("Results");
@@ -46,7 +49,6 @@ public class ResultForm extends Stage {
         // Show "Results"
         labResult = new Label();
         labResult.setStyle("-fx-font-size: 14pt;");
-        
         labResultLabel.setStyle("-fx-font-size: 15pt;");
 
         // Show Percentage
@@ -55,8 +57,6 @@ public class ResultForm extends Stage {
 
         labPercentage = new Label();
         labPercentage.setStyle("-fx-font-size: 15pt;");
-        labGrade = new Label();
-        labGrade.setStyle("-fx-font-size: 15pt;");
 
         Label selected = new Label();
 
@@ -76,11 +76,11 @@ public class ResultForm extends Stage {
         btnDisplay.setOnAction(e -> {
             selected.setText("Displaying result of " + comboBox.getValue());
             selected.setStyle("-fx-font-size: 16pt;");
-            compareAns(rfile, qfile);
+            compareAns(ansFile, inputFile);
         });
 
         HBox myHbox = new HBox(comboBox, btnDisplay);
-	myHbox.setPadding(new Insets(15, 12, 15, 12));
+	    myHbox.setPadding(new Insets(15, 12, 15, 12));
         myHbox.setSpacing(10);
         myHbox.setAlignment(Pos.CENTER);
         
@@ -90,7 +90,7 @@ public class ResultForm extends Stage {
         myHbox2.setAlignment(Pos.CENTER);
             
         // Adding the components into the scene
-        VBox myVbox = new VBox(labName, myHbox, selected, labResultLabel, labResult, myHbox2, labGrade, btnExit);
+        VBox myVbox = new VBox(labName, myHbox, selected, labResultLabel, labResult, myHbox2, btnExit);
         myVbox.setSpacing(10);
         myVbox.setAlignment(Pos.CENTER);
 
@@ -104,7 +104,7 @@ public class ResultForm extends Stage {
         Scanner rFile;
         String name;
         try {
-            rFile = new Scanner(rfile);
+            rFile = new Scanner(ansFile);
             while (rFile.hasNextLine()) {
                 String aLine = rFile.nextLine();
                 Scanner sline = new Scanner(aLine);
@@ -124,7 +124,7 @@ public class ResultForm extends Stage {
     }
 
     // Compare Answers
-    public void compareAns(File rf, File qf) {
+    public void compareAns(File rf, File qf) { //rf = ansFile   qf = inputFile
         Scanner sQueFile;
         int type;
         char answer;
@@ -142,7 +142,6 @@ public class ResultForm extends Stage {
 
                 type = Integer.parseInt(qLineSplit.next());
                 answer = qLineSplit.next().charAt(0);
-
                 ansSheet[curAnsSheetIndex] = answer;
                 curAnsSheetIndex++;
             }
@@ -157,9 +156,8 @@ public class ResultForm extends Stage {
         double percentageResults = 0;
         double correctAns = 0;
         try {
-            sfile = new Scanner(rf);
+            sfile = new Scanner(rf); //to read answer file
             while (sfile.hasNextLine()) {
-
                 String aLine = sfile.nextLine();
                 Scanner sline = new Scanner(aLine);
                 sline.useDelimiter(":");
@@ -177,29 +175,22 @@ public class ResultForm extends Stage {
                     }
 
                     if (name.equals(comboBox.getValue())) {
+                        for (int k = 0; k < ansSheet.length; k++) {
+                            if (ansSheet[k] == finalAns[k]) {
+                                correctAns++;
+                            }
+                        }
+
                         for (int k = 0; k < finalAns.length; k++) {
                             result += k + 1 + ".\t" + finalAns[k] + " \t";
                             if (k == 4 | k == 9 | k == 14 | k == 19 | k == 24) {
                                 result += "\n";
                             }
                         }
-                        for (int k = 0; k < ansSheet.length; k++) {
-                            if (ansSheet[k] == finalAns[k]) {
-                                correctAns++;
-                            }
-                        }
+
                         percentageResults = (correctAns / totQues) * 100;
                         percentageResults = Math.round(percentageResults * 100.0) / 100.0;
-                        labPercentage.setText(Double.toString(percentageResults) + " % ");
-
-                        // Checks if contestants passed or failed
-                        if (percentageResults >= 50) {
-                            labGrade.setText("Contestant successfully passed the quiz!");
-                        } else if (percentageResults < 50) {
-                            labGrade.setText("Contestant has failed the quiz!");
-                        } else {
-                            labGrade.setText("Sorry, something went wrong!");
-                        }
+                        labPercentage.setText(df0.format(correctAns) + " / " + totQues + " ( " + df2.format(percentageResults) + " % )");
                     }
                 }
             }

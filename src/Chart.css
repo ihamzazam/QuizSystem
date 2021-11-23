@@ -14,6 +14,16 @@ and open the template in the editor.
   -fx-color-not-answered: grey;
 }
 
+.button:hover {
+  -fx-background-color: linear-gradient(#74ebd5, #ACB6E5);
+  -fx-effect:dropshadow(one-pass-box,black,8,0.0,2,0);
+}
+
+.button {
+  -fx-font-size: 12px;
+  -fx-font-weight: BOLD;
+}
+
 .default-color0.chart-bar { -fx-bar-fill: -fx-color-correct; }
 .default-color1.chart-bar { -fx-bar-fill: -fx-color-wrong; }
 .default-color2.chart-bar { -fx-bar-fill: -fx-color-not-answered; }

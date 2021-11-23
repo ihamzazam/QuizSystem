@@ -26,27 +26,22 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 public class ContestantEntryForm extends Stage {
 
     // declaring and initializing the variables 
     private File contProfile = new File("./data", "contestants.txt");
     private File rfile = new File("./data", "answers.txt");
-    private TextField fieldName, fieldPass;
-    private Boolean verified = false;
-    private ChoiceBox<String> choicebox = new ChoiceBox<>();
+    private PasswordField fieldPass;
+    private Boolean verifiedPass = false, verifiedCountry = false;;
     private VBox contestantVbox;
     private HBox contestantHbox, contestantHbox2;
     private Scene contestantScene;
@@ -57,6 +52,7 @@ public class ContestantEntryForm extends Stage {
     private ImageView imageCont, imageCont2, imageCont3; // imageCont = imageContestant
     private ResultForm winResult;
     ComboBox<String> comboBoxName;
+    ComboBox<String> comboBoxCountry;
     List<String> listNames = new ArrayList<String>();
     private IntegerProperty maxLength = new SimpleIntegerProperty(this, "maxLength", 7);
     private StringProperty restrict = new SimpleStringProperty(this, "restrict");
@@ -85,51 +81,51 @@ public class ContestantEntryForm extends Stage {
 		
 		space = new Label("");
 
-		// Textfield to input the name
-		fieldName = new TextField();
-                fieldName.setMaxWidth(325);
-
 		// Textfield to input the password
-		fieldPass = new TextField();
+		fieldPass = new PasswordField();
                 fieldPass.setMaxWidth(325);
                 fieldPass.setPromptText("03xxxxx");
                                
 		
-        fieldPass.textProperty().addListener(new ChangeListener<String>() {
-        	private boolean ignore;
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, 
-                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    fieldPass.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-                if (ignore || newValue == null)
-                    return;
-                if (maxLength.get() > -1 && newValue.length() > maxLength.get()) {
-                    ignore = true;
-                    fieldPass.setText(newValue.substring(0, maxLength.get()));
-                    ignore = false;
-                }
-                if (restrict.get() != null && !restrict.get().equals("") && !newValue.matches(restrict.get() + "*")) {
-                    ignore = true;
-                    fieldPass.setText(oldValue);
-                    ignore = false;
-                }
-            }
-        });
+                fieldPass.textProperty().addListener(new ChangeListener<String>() {
+                        private boolean ignore;
+                        @Override
+                        public void changed(ObservableValue<? extends String> observable, String oldValue, 
+                                String newValue) {
+                                if (!newValue.matches("\\d*")) {
+                                        fieldPass.setText(newValue.replaceAll("[^\\d]", ""));
+                                }
+                                if (ignore || newValue == null)
+                                        return;
+                                if (maxLength.get() > -1 && newValue.length() > maxLength.get()) {
+                                        ignore = true;
+                                        fieldPass.setText(newValue.substring(0, maxLength.get()));
+                                        ignore = false;
+                                }
+                                if (restrict.get() != null && !restrict.get().equals("") && !newValue.matches(restrict.get() + "*")) {
+                                        ignore = true;
+                                        fieldPass.setText(oldValue);
+                                        ignore = false;
+                                }
+                        }
+                });
         
 		// Dropdown option to select country
-		choicebox.getItems().addAll("Mozambique","Namibia","Montenegro","Morocco","Myanmar");
-		choicebox.setValue("Mozambique");
-                choicebox.setMaxWidth(325);
+                comboBoxCountry = new ComboBox<>();
+		comboBoxCountry.getItems().addAll("Mozambique","Namibia","Montenegro","Morocco","Myanmar");
+		comboBoxCountry.setValue("Mozambique");
+                comboBoxCountry.setMaxWidth(325);
 
 		// Button to start the test 
 		proceedBtn = new Button(" PROCEED TO TEST ");
 		proceedBtn.setOnAction(e -> {
 			checkNames();
-                        verified = verification();
+                        verifiedPass = verifyPass();
+                        verifiedCountry = verifyCountry();
+
                         if (listNames.contains(comboBoxName.getValue())) {
                             comboBoxName.setValue("");
+                            fieldPass.setText("");
                             contName.setText("This user has taken the test, please select another user");
                             contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
                             imageCont.setImage(imageBlank);
@@ -140,9 +136,13 @@ public class ContestantEntryForm extends Stage {
                             contName.setText("Please select a user to proceed");
                             contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
                         }
-                        else if (verified == false) {
+                        else if (verifiedPass == false) {
                             contName.setText("Incorrect Password");
                             contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
+                        }
+                        else if (verifiedCountry == false) {
+                                contName.setText("Incorrect Country");
+                                contName.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#ff0000;");
                         }
                         else {
                               this.hide();                       
@@ -162,7 +162,8 @@ public class ContestantEntryForm extends Stage {
                 comboBoxName.setMaxWidth(325);
 		comboBoxName.getItems().addAll("Hamza","Kishendran","Yii Cherng","Sara","Firdaus");
 		comboBoxName.setEditable(true);
-		comboBoxName.setPromptText("Name");
+		comboBoxName.setPromptText("Select Name");
+                comboBoxName.setEditable(false);
 		
 		// Check the name selected by user
 		comboBoxName.setOnAction(e -> {
@@ -222,7 +223,7 @@ public class ContestantEntryForm extends Stage {
                 // Add contestant Vbox and Scene
                 contestantVbox = new VBox(12);
                 contestantVbox.setAlignment(Pos.CENTER);
-                contestantVbox.getChildren().addAll(labTitle, contestantHbox,contName,comboBoxName,labPass,fieldPass,labCountry,choicebox,contestantHbox2,space);
+                contestantVbox.getChildren().addAll(labTitle, contestantHbox,contName,comboBoxName,labPass,fieldPass,labCountry,comboBoxCountry,contestantHbox2,space);
                 contestantScene = new Scene(contestantVbox, 900, 700);
                 this.setScene(contestantScene);
                 contestantScene.getStylesheets().add("login.css");
@@ -285,7 +286,31 @@ public class ContestantEntryForm extends Stage {
 		}
 	}
 	
-        public boolean verification() {
+        public boolean verifyCountry() {
+                boolean c = false;
+                try {
+                    Scanner sfile = new Scanner(contProfile);
+                    int totalCont = Integer.parseInt(sfile.nextLine());
+                    for (int i = 0; i < totalCont; i++) {
+                        String aline = sfile.nextLine();
+                        Scanner sline = new Scanner(aline);
+                        sline.useDelimiter(",");
+                        String n = sline.next();
+                        if (comboBoxName.getValue().equals(n)) {
+                                sline.next();
+                                String country = sline.next();
+                                if (comboBoxCountry.getValue().equals(country)){
+                                        c = true;
+                                }
+                        }
+                    }
+                } catch (FileNotFoundException e) {
+                    System.out.println("file not found");
+                }
+                return c;
+        }
+        
+        public boolean verifyPass() {
             boolean v = false;
             try {
                 Scanner sfile = new Scanner(contProfile);
@@ -311,37 +336,31 @@ public class ContestantEntryForm extends Stage {
 	// Scanning for names in results.txt file
 	public void checkNames() {
 		Scanner rFile;
-        int totQues = 25;
-        char cAns;
-        String name;
-        try {
-            rFile = new Scanner(rfile);
-            while (rFile.hasNextLine()) {
-                String aLine = rFile.nextLine();
-                Scanner sline = new Scanner(aLine);
-                sline.useDelimiter(":");
-                while (sline.hasNext()) {
-                    for (int i = 0; i < totQues; i++) {
-                        cAns = sline.next().charAt(0);
-                    }
-                    name = sline.next();
-                    listNames.add(name);
+                int totQues = 25;
+                char cAns;
+                String name;
+                try {
+                rFile = new Scanner(rfile);
+                        while (rFile.hasNextLine()) {
+                                String aLine = rFile.nextLine();
+                                Scanner sline = new Scanner(aLine);
+                                sline.useDelimiter(":");
+                                while (sline.hasNext()) {
+                                        for (int i = 0; i < totQues; i++) {
+                                                cAns = sline.next().charAt(0);
+                                        }
+                                        name = sline.next();
+                                        listNames.add(name);
+                                }
+                        }
+                } catch (Exception e) {
+                        System.out.println(e);
                 }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-	}
-	
-	// Method to get the country selected from choiceBox
-	public void getChoice(ChoiceBox<String> choicebox) {
-		String country = choicebox.getValue();
-		System.out.println(country);
 	}
 
 	// Method to get the country selected
 	public String getCountry() {
-		return choicebox.getValue();
+		return comboBoxCountry.getValue();
 	}
 
 	// Method to get the Name
