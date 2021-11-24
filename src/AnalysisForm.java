@@ -27,8 +27,8 @@ import java.lang.Math;
 public class AnalysisForm extends Stage {
 
     //Declaration and initialisation of variables
-    private File qf = new File("./data", "inputdata.txt");
-    private File myf = new File("./data", "answers.txt");
+    private File quesFile = new File("./data", "inputdata.txt");
+    private File contAnsFile = new File("./data", "answers.txt");
     final CategoryAxis xAxis = new CategoryAxis();
     final NumberAxis yAxis = new NumberAxis();
     final BarChart<String, Number> bc = new BarChart<String, Number>(xAxis, yAxis);
@@ -52,31 +52,30 @@ public class AnalysisForm extends Stage {
         bc.setMinWidth(1000);
         labResult.setStyle("-fx-font-size: 14pt;-fx-font-family:serif;-fx-text-fill:#000000;");
 
-        Scanner sQueFile;
+        Scanner sQuesFile;
         char ansSheet[] = new char[totQues];
-        int type;
         char answer;
         int curAnsSheetIndex = 0;
         try {
-            sQueFile = new Scanner(qf);
+            sQuesFile = new Scanner(quesFile);
 
-            totQues = Integer.parseInt(sQueFile.nextLine());
+            totQues = Integer.parseInt(sQuesFile.nextLine()); //Get the total number of question
             ansSheet = new char[totQues];
 
-            while (sQueFile.hasNextLine()) {
-                String qLine = sQueFile.nextLine();
+            while (sQuesFile.hasNextLine()) { //while question file has next line
+                String qLine = sQuesFile.nextLine();
                 Scanner qLineSplit = new Scanner(qLine);
-                qLineSplit.useDelimiter(":");
+                qLineSplit.useDelimiter(":"); //split based on delimiter of ":"
 
-                type = Integer.parseInt(qLineSplit.next());
-                answer = qLineSplit.next().charAt(0);
+                Integer.parseInt(qLineSplit.next());
+                answer = qLineSplit.next().charAt(0); //Get the answer at char(0) by using the delimiter of ":"
 
-                ansSheet[curAnsSheetIndex] = answer;
+                ansSheet[curAnsSheetIndex] = answer; //Insert answer into array of answer sheet
                 curAnsSheetIndex++;
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("File to read " + qf + " not found!");
+            System.out.println("File to read " + quesFile + " not found!");
         }
 
         Scanner sfile;
@@ -84,88 +83,86 @@ public class AnalysisForm extends Stage {
         int correctAns = 0;
         int wrongAns = 0;
         int noAns = 0;
-        int count = 0;
+        int contNum = 0;
         int max = 0;
         int min = 0;
-        char cAns;
+        char contAns;
         double median;
         int mode;
-        List<Integer> cRes = new ArrayList<Integer>();
+        List<Integer> contRes = new ArrayList<Integer>();
         double totCorrectAns = 0;
         double mean;
         double std;
         try {
-            sfile = new Scanner(myf);
-            while (sfile.hasNextLine()) {
-
+            sfile = new Scanner(contAnsFile); //Scanner for contestant's answer file
+            while (sfile.hasNextLine()) { //While file has next line
                 String aLine = sfile.nextLine();
                 Scanner sline = new Scanner(aLine);
                 sline.useDelimiter(":");
 
                 while (sline.hasNext()) {
-
                     for (int i = 0; i < totQues; i++) {
-                        cAns = sline.next().charAt(0);
-                        if ("ABCD".indexOf(cAns) == -1) {
-                            noAns++;
-                        } else if (cAns == ansSheet[i]) {
-                            correctAns++;
-                        } else {
-                            wrongAns++;
+                        contAns = sline.next().charAt(0);
+                        if ("ABCD".indexOf(contAns) == -1) { //If contestant did not answer the question
+                            noAns++; //No answer increase
+                        } else if (contAns == ansSheet[i]) { //If contestant's answer is same as the answersheet
+                            correctAns++; //Correct Answer increase
+                        } else { //If answer is wrong
+                            wrongAns++; //Wrong answer increase
                         }
                     }
 
-                    if (sline.hasNext()) {
+                    if (sline.hasNext()) { //To get name 
                         name = sline.next();
 
                         series1.setName("Correct Answer(s)");
-                        series1.getData().add(new XYChart.Data(name, correctAns));
+                        series1.getData().add(new XYChart.Data(name, correctAns)); //Insert the value of the contestant's name and correct answers for barchart
 
                         series2.setName("Wrong Answer(s)");
-                        series2.getData().add(new XYChart.Data(name, wrongAns));
+                        series2.getData().add(new XYChart.Data(name, wrongAns)); //Insert the value of the contestant's name and wrong answers for barchart
 
                         series3.setName("Question did not answer");
-                        series3.getData().add(new XYChart.Data(name, noAns));
+                        series3.getData().add(new XYChart.Data(name, noAns)); //Insert the value of the contestant's name and no attempted answer for barchart
 
-                        count++;
-                        totCorrectAns += correctAns;
+                        contNum++; //Get the total number of contestant
+                        totCorrectAns += correctAns; //To get the total number of correct answer
 
-                        cRes.add(correctAns);
+                        contRes.add(correctAns); //Total number of correct answer is added into array
 
-                    } else {
-                        System.out.println("No name is assigned for these results.");
                     }
-
+                    
+                    //To reset the value
                     correctAns = 0;
                     wrongAns = 0;
                     noAns = 0;
                 }
-                max = maximum(cRes, count);
-                min = minimum(cRes, count);
-                mean = totCorrectAns / count;
+                max = maximum(contRes); //To get the maximum score of the quiz
+                min = minimum(contRes); //To get the minimum score of the quiz
+                mean = totCorrectAns / contNum; //To get the mean score of the quiz
                 mean = Math.round(mean * 100.0) / 100.0;
-                mode = mode(cRes, count);
-                median = median(cRes, count);
-                std = stdDeviation(cRes, count, mean);
+                mode = mode(contRes, contNum); //To get the mode score of the quiz
+                median = median(contRes, contNum); //To get the median score of the quiz
+                std = stdDeviation(contRes, contNum, mean); //To get the standard deviation of the quiz
                 std = Math.round(std * 100.0) / 100.0;
 
                 labResult.setText("Statistical Analysis \n"
-                        + "\n"
-                        + "Highest Score" + "\t\t" + ": " + Integer.toString(max) + "\n"
-                        + "Lowest Score" + "\t\t" + ": " + Integer.toString(min) + "\n"
-                        + "Mean" + "\t\t\t" + ": " + Double.toString(mean) + "\n"
-                        + "Mode" + "\t\t\t" + ": " + Integer.toString(mode) + "\n"
-                        + "Median" + "\t\t\t" + ": " + Double.toString(median) + "\n"
-                        + "Standard Deviation" + "\t" + ": " + Double.toString(std));
+                    + "\n"
+                    + "Highest Score" + "\t\t" + ": " + Integer.toString(max) + "\n"
+                    + "Lowest Score" + "\t\t" + ": " + Integer.toString(min) + "\n"
+                    + "Mean" + "\t\t\t" + ": " + Double.toString(mean) + "\n"
+                    + "Mode" + "\t\t\t" + ": " + Integer.toString(mode) + "\n"
+                    + "Median" + "\t\t\t" + ": " + Double.toString(median) + "\n"
+                    + "Standard Deviation" + "\t" + ": " + Double.toString(std)
+                );
             }
             sfile.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File to read " + myf + " not found!");
+            System.out.println("File to read " + contAnsFile + " not found!");
         }
 
-        bc.getData().addAll(series1, series2, series3);
+        bc.getData().addAll(series1, series2, series3); //Add all the values into bar chart
 
-        Button btnExit = new Button("EXIT");
+        Button btnExit = new Button("EXIT"); //Exit button to close the system
         btnExit.setOnAction(e -> {
             this.close();
         });
@@ -179,67 +176,68 @@ public class AnalysisForm extends Stage {
     }
 
     //Calculation of maximum score
-    public int maximum(List<Integer> a, int n) {
+    public int maximum(List<Integer> result) {
         int maximum;
-        maximum = a.get(0);
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i) > maximum) {
-                maximum = a.get(i);
+        maximum = result.get(0); //To assign the first array as the maximum score
+        for (int i = 0; i < result.size(); i++) { //To loop through the whole array of result
+            if (result.get(i) > maximum) { //If there is a score lower than the maximum
+                maximum = result.get(i); //That score is assigned as the maximum
             }
         }
         return maximum;
     }
 
     //Calculation of minimum score
-    public int minimum(List<Integer> a, int n) {
+    public int minimum(List<Integer> result) {
         int minimum;
-        minimum = a.get(0);
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i) < minimum) {
-                minimum = a.get(i);
+        minimum = result.get(0); //To assign the first array as the minimum score
+        for (int i = 0; i < result.size(); i++) { //To loop through the whole array of result
+            if (result.get(i) < minimum) { //If there is a score lower than the minimum
+                minimum = result.get(i); //That score is assigned as the minimum
             }
         }
         return minimum;
     }
 
     //Calculation of mode
-    public int mode(List<Integer> a, int n) {
+    public int mode(List<Integer> result, int contNo) {
         int maxValue = 0, maxCount = 0, i, j;
-        for (i = 0; i < n; ++i) {
+        for (i = 0; i < contNo; ++i) { //Loop based on the number of contestant
             int count = 0;
-            for (j = 0; j < n; ++j) {
-                if (a.get(j) == a.get(i)) {
-                    ++count;
+            for (j = 0; j < contNo; ++j) { //Based on that contestant's result, a loop will occur to compare the other contestant to this contestant
+                if (result.get(j) == result.get(i)) { //If the score is the same
+                    ++count; //Count will increase
                 }
             }
-            if (count > maxCount) {
-                maxCount = count;
-                maxValue = a.get(i);
+            if (count > maxCount) { //If the count is greater than the current maxCount
+                maxCount = count; //maxCount will equals to the count
+                maxValue = result.get(i); //maxValue will be assigned to that maxCount's result
             }
         }
         return maxValue;
     }
 
     //Calculation of median
-    public int median(List<Integer> a, int n) {
+    public int median(List<Integer> result, int contNo) {
         int m;
-        Collections.sort(a);
-        if (n % 2 == 1) {
-            m = a.get((n + 1) / 2 - 1);
-        } else {
-            m = (a.get(n / 2 - 1) + a.get(n / 2)) / 2;
+        Collections.sort(result); //To sort result to ascending order
+        if (contNo % 2 == 1) { //If there are only 2 contestants
+            m = result.get((contNo + 1) / 2 - 1);
+        } else { //If there are more than 2 contestants
+            m = (result.get(contNo / 2 - 1) + result.get(contNo / 2)) / 2;
         }
         return m;
     }
 
     //Calculation of standard deviation
-    public double stdDeviation(List<Integer> a, int n, double m) {
+    public double stdDeviation(List<Integer> result, int contNo, double m) {
         int sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum += Math.pow((a.get(i) - m), 2);
+        double sq = 0.0;
+        for (int i = 0; i < contNo; i++) {
+            sum += Math.pow((result.get(i) - m), 2); //Using math pow to get the sum
         }
-        m = sum / n;
-        double std = Math.sqrt(m);
+        sq = sum / contNo; //Sum will then be divided with number of contestant
+        double std = Math.sqrt(sq); //Then it will be square rooted to get the standard deviation
         return std;
     }
 

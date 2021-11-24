@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 public class ResultForm extends Stage {
 
     //Declaration and initialisation of variables
-    private File ansFile = new File("./data", "answers.txt");
+    private File contAnsFile = new File("./data", "answers.txt");
     private File inputFile = new File("./data", "inputdata.txt");
     private int totQues = 25;
     ComboBox<String> comboBox;
@@ -34,12 +34,13 @@ public class ResultForm extends Stage {
     private Label labName;
     private Label labResult, labPercentage;
     private AnalysisForm winAnalysis;
-    private char cAns;
+    private char contAns;
     private char ansSheet[] = new char[totQues];
     private char finalAns[] = new char[totQues];
     List<String> listNames = new ArrayList<String>();
+
+    //Decimal Format to format the decimal point
     DecimalFormat df0 = new DecimalFormat("#");
-    DecimalFormat df2 = new DecimalFormat("#.00");
 
     public ResultForm() {
         this.setTitle("Results");
@@ -65,18 +66,18 @@ public class ResultForm extends Stage {
 
         // Button Proceed to analysis
         Button btnExit = new Button("Proceed to Analysis");
-        btnExit.setOnAction(e -> {
-            this.hide();
+        btnExit.setOnAction(e -> { //When button "Proceed to Analysis" is clicked
+            this.hide(); //Result form will hide
             winAnalysis = new AnalysisForm();
-            winAnalysis.showStage();
+            winAnalysis.showStage(); //Analysis form will show
         });
 
         // Button Display Results
         Button btnDisplay = new Button("Display Results");
-        btnDisplay.setOnAction(e -> {
+        btnDisplay.setOnAction(e -> { //When button "Display Results" is clicked, result of the selected contestant will display
             selected.setText("Displaying result of " + comboBox.getValue());
             selected.setStyle("-fx-font-size: 16pt;");
-            compareAns(ansFile, inputFile);
+            compareAns(contAnsFile, inputFile); //To display the results
         });
 
         HBox myHbox = new HBox(comboBox, btnDisplay);
@@ -99,19 +100,19 @@ public class ResultForm extends Stage {
         scene.getStylesheets().add("style.css");
     }
 
-    //Adding names into the dropDown List
+    //Adding names into the dropDown List of the result
     public void readName() {
         Scanner rFile;
         String name;
         try {
-            rFile = new Scanner(ansFile);
+            rFile = new Scanner(contAnsFile);
             while (rFile.hasNextLine()) {
                 String aLine = rFile.nextLine();
                 Scanner sline = new Scanner(aLine);
                 sline.useDelimiter(":");
                 while (sline.hasNext()) {
                     for (int i = 0; i < totQues; i++) {
-                        cAns = sline.next().charAt(0);
+                        contAns = sline.next().charAt(0);
                     }
                     name = sline.next();
                     listNames.add(name);
@@ -123,26 +124,25 @@ public class ResultForm extends Stage {
         }
     }
 
-    // Compare Answers
+    // Compare Answers and display the results
     public void compareAns(File rf, File qf) { //rf = ansFile   qf = inputFile
         Scanner sQueFile;
-        int type;
         char answer;
         int curAnsSheetIndex = 0;
         try {
-            sQueFile = new Scanner(qf);
+            sQueFile = new Scanner(qf); //To read question file
 
-            totQues = Integer.parseInt(sQueFile.nextLine());
-            ansSheet = new char[totQues];
+            totQues = Integer.parseInt(sQueFile.nextLine()); //To get the total number of questions
+            ansSheet = new char[totQues]; //To set the array limit of answer sheet to the total question
 
-            while (sQueFile.hasNextLine()) {
-                String qLine = sQueFile.nextLine();
+            while (sQueFile.hasNextLine()) { //If question file has next line
+                String qLine = sQueFile.nextLine(); // qLine will start from the second line of sQueFile which is the question
                 Scanner qLineSplit = new Scanner(qLine);
-                qLineSplit.useDelimiter(":");
-
-                type = Integer.parseInt(qLineSplit.next());
-                answer = qLineSplit.next().charAt(0);
-                ansSheet[curAnsSheetIndex] = answer;
+                qLineSplit.useDelimiter(":"); //To scan and split the line
+                
+                Integer.parseInt(qLineSplit.next());
+                answer = qLineSplit.next().charAt(0); //To get the answer
+                ansSheet[curAnsSheetIndex] = answer; //Add answer to array
                 curAnsSheetIndex++;
             }
 
@@ -156,48 +156,48 @@ public class ResultForm extends Stage {
         double percentageResults = 0;
         double correctAns = 0;
         try {
-            sfile = new Scanner(rf); //to read answer file
-            while (sfile.hasNextLine()) {
+            sfile = new Scanner(rf); //To read answer file
+            while (sfile.hasNextLine()) { //While is answer file has next line
                 String aLine = sfile.nextLine();
                 Scanner sline = new Scanner(aLine);
                 sline.useDelimiter(":");
 
-                while (sline.hasNext()) {
-                    for (int i = 0; i < totQues; i++) {
-                        cAns = sline.next().charAt(0);
-                        finalAns[i] = cAns;
+                while (sline.hasNext()) { //while answer file has next line
+                    for (int i = 0; i < totQues; i++) { //loop based on total question
+                        contAns = sline.next().charAt(0); //To get the answer of the contestant
+                        finalAns[i] = contAns; //Array to keep answer of contestant
                     }
 
                     if (sline.hasNext()) {
-                        name = sline.next();
+                        name = sline.next(); //Get name
                     } else {
                         name = "";
                     }
 
-                    if (name.equals(comboBox.getValue())) {
-                        for (int k = 0; k < ansSheet.length; k++) {
-                            if (ansSheet[k] == finalAns[k]) {
-                                correctAns++;
+                    if (name.equals(comboBox.getValue())) { //The name from combobox is equal to the name of the answer file
+                        for (int k = 0; k < ansSheet.length; k++) { //Loop to get the number of correct answer
+                            if (ansSheet[k] == finalAns[k]) { //To compare and get the number of right answer
+                                correctAns++; //To get the total number of correct answers
                             }
                         }
 
-                        for (int k = 0; k < finalAns.length; k++) {
+                        for (int k = 0; k < finalAns.length; k++) { //Loop to print the contestant's answer
                             result += k + 1 + ".\t" + finalAns[k] + " \t";
                             if (k == 4 | k == 9 | k == 14 | k == 19 | k == 24) {
                                 result += "\n";
                             }
                         }
 
-                        percentageResults = (correctAns / totQues) * 100;
+                        percentageResults = (correctAns / totQues) * 100; //Get the percentage of the result
                         percentageResults = Math.round(percentageResults * 100.0) / 100.0;
-                        labPercentage.setText(df0.format(correctAns) + " / " + totQues + " ( " + df2.format(percentageResults) + " % )");
+                        labPercentage.setText(df0.format(correctAns) + " / " + totQues + " ( " + df0.format(percentageResults) + " % )"); //To print the percentage
                     }
                 }
             }
-            if (comboBox.getValue() == null) {
+            if (comboBox.getValue() == null) { //If there is not any contestant selected and display result is clicked, "NOTHING TO DISPLAY" will print
                 result += "NOTHING TO DISPLAY";
             }
-            labResult.setText(result);
+            labResult.setText(result); //To write the results to labResult
             sfile.close();
         } catch (Exception e) {
             System.out.println(e);
